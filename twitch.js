@@ -19,15 +19,18 @@ function getChannel(each){
           if(users.stream === null){
             $(".user" + each).html(channels[each] + "<i class='fa fa-circle offline float-right' aria-hidden='true'></i>");
             $(".c" + each).addClass("off");
+            $(".c" + each).addClass("all");
           }
           else {
             $(".user" + each).html(channels[each] + " : " + users.stream.game);
             $(".icon" + each).html("<i class='fa fa-circle online float-right' aria-hidden='true'></i>");
             $(".c" + each).addClass("on")
+            $(".c" + each).addClass("all");
           }
         });
       }
   });
+  $(".c" + each).addClass(channels[each]);
 }
 
 function getInfo(){
@@ -36,40 +39,53 @@ function getInfo(){
   }
 }
 
-function filterStatus(){
-  $(".allBtn").click(function(){
-    $(".all").show();
-    $(".off").show();
-    $(".on").show();
-  });
+function getActive(){
+  if($(".onBtn").hasClass("active")){
+    return "on";
+  }
+  else if($(".offBtn").hasClass("active")){
+    return "off";
+  }
+  else {
+    return "all";
+  }
+}
+
+function getFilters(){
   $(".offBtn").click(function(){
-    $(".off").show();
-    $(".all").hide();
-    $(".on").hide();
+    var search = $("input:text").val().toLowerCase();
+    var selected = "off";
+    filterResults(search, selected);
   });
   $(".onBtn").click(function(){
-    $(".on").show();
-    $(".all").hide();
-    $(".off").hide();
+    var search = $("input:text").val().toLowerCase();
+    var selected = "on";
+    filterResults(search, selected);
+  });
+  $(".allBtn").click(function(){
+    var search = $("input:text").val().toLowerCase();
+    var selected = "all";
+    filterResults(search, selected);
+  });
+  $("input").keyup(function(){
+    var search = $("input:text").val().toLowerCase();
+    var selected = getActive();
+    filterResults(search, selected);
   });
 }
 
-function filterSearch(){
-  $("input").keyup(function(){
-    var search = $("input:text").val();
-    for(each in channels){
-      if(channels[each].toLowerCase().match(search.toLowerCase()) === null){
-        $(".c" + each).hide();
-      }
-      else {
-        $(".c" + each).show();
-      }
+function filterResults(search, selected){
+  for(each in channels){
+    if(channels[each].toLowerCase().match(search) !== null && $("." + channels[each]).hasClass(selected)){
+      $("." + channels[each]).show();
     }
-  });
+    else {
+      $("." + channels[each]).hide();
+    }
+  }
 }
 
 $(document).ready(function(){
   getInfo();
-  filterStatus();
-  filterSearch();
+  getFilters();
 });
