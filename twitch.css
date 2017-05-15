@@ -14,8 +14,26 @@ img {
   width: 50px;
 }
 
-.col-xl-4 {
-  margin-top: 10px;
+.col {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.no-pad {
+  padding-top: 0px;
+}
+
+.box {
+  padding: 20px;
+  background-image: linear-gradient(360deg, #835ba8, #bc509f);
+  width: 370px;
+  margin: 0 auto;
+}
+
+@media (max-width: 400px) {
+  .box {
+    width: 100%;
+  }
 }
 
 .online, .offline, .dne {
@@ -24,6 +42,47 @@ img {
 }
 
 .container {
-  margin-top: 40px;
-  margin-bottom: 40px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.btn-group {
+  display: flex;
+}
+
+.btn-outline-primary {
+  flex: 1;
+  color: white;
+  border-color: white;
+}
+
+.btn-outline-primary.active, .btn-outline-primary:active, .btn-outline-primary:focus, .btn-outline-primary:hover {
+  background-color: rgba(255,255,255,0.3);
+  border-color: white;
+  box-shadow: none;
+}
+
+label {
+  width: calc(100%/3);
+}
+
+[class^="detail"]{
+  font-size: 14px;
+  font-style: italic;
+  color: #d2d2d2
+}
+
+body {
+  font-family: Lato, sans-serif;
+  color: white;
+}
+
+a, a:active, a:hover, a:focus, a:visited{
+  color: white;
+  text-decoration: none;
+}
+
+[class^="info"]{
+  display: inline-block;
+  vertical-align: middle;
 }
