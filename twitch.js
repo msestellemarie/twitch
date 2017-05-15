@@ -70,7 +70,7 @@ function getFilters(){
 
 function filterResults(search, selected){
   for(each in channels){
-    if($(".user" + each).text().toLowerCase().concat($(".detail" + each).text().toLowerCase()).match(search) !== null && $(".c" + each).hasClass(selected)){
+    if($(".user" + each).text().toLowerCase().concat(" ", $(".detail" + each).text().toLowerCase()).match(search) !== null && $(".c" + each).hasClass(selected)){
       $(".c" + each).show();
     }
     else {
